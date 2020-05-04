@@ -5,6 +5,7 @@
      <Loading v-if="!isLoaded"></Loading>
     <div class="home" :style="{ height: scrollHeight }" v-else>
        <cube-scroll>
+         <!-- 轮播图 -->
       <div><Banner></Banner></div>
       <div>
         <div class="home-main">
@@ -12,6 +13,7 @@
             <span>主编力荐(男生)</span>
             <span @click="more(id1)">更多&gt;</span>
           </div>
+          <!-- 推荐书籍 -->
           <div class="home-item" v-for="item in ManData" :key="item.id">
             <router-link
               :to="{ path: 'book', query: { id: item._id } }"
@@ -39,6 +41,7 @@
             <span>主编力荐(女生)</span>
             <span @click="more(id2)">更多&gt;</span>
           </div>
+          <!-- 推荐书籍 -->
           <div class="home-item" v-for="item in GirlData" :key="item.id">
             <router-link
               :to="{ path: '/book', query: { id: item._id } }"
@@ -98,6 +101,7 @@ export default {
     };
   },
   methods: {
+    // 获取书籍
     getData() {
       this.$axios.get(`/api/ranking/${this.id1}`).then(res => {
         if (res.data.ok) {
@@ -105,6 +109,7 @@ export default {
           this.isLoaded = true;
         }
       });
+      // 女生推荐
       this.$axios.get(`/api/ranking/${this.id2}`).then(res => {
         if (res.data.ok) {
           this.GirlData = res.data.ranking.books.slice(0, 7);

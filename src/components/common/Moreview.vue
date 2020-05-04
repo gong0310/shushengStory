@@ -2,6 +2,7 @@
   <div>
     <Header :title="header.title" :showBack="true"></Header>
     <Loading v-if="isLoaded"></Loading>
+    <!-- 评论 -->
     <div class="book-review-main" v-else :style="{ height: scrollHeight }">
       <cube-scroll>
         <div class="book-review-item" v-for="(item, index) in bookReviewData" :key="index">
@@ -52,6 +53,7 @@ export default {
     this.getBookReview();
   },
   methods: {
+    // 获取书籍详情
     getBookReview() {
       this.$axios
         .get(
@@ -76,6 +78,7 @@ export default {
           this.bookReviewData = _bookReviewData;
         });
     },
+    // 可以换做过滤器，一样的
     formatUpdatedTime(time, otherText) {
       let _timestamp = new Date() - new Date(time);
       if (_timestamp / 1000 < 60) {

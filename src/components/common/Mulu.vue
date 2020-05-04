@@ -4,6 +4,7 @@
     <div>
       <loading v-if="isLoaded" />
       <div class="info" v-else>
+        <!-- 目录 -->
         <span class="count">共{{chapters.length}}章</span>
         <span class="sort" @click="reverse">
           <span v-if="!ascOrder">&uarr;倒序</span>
@@ -13,7 +14,7 @@
       <ul :style="{ height: scrollHeight }" ref="book">
         <cube-scroll>
           <li class="chapters" v-for="(item, index) of chapters" :key="index">
-            <div  @click="ch(index+1)">
+            <div  @click="goread(index+1)">
               {{ item.order }}&nbsp;{{ item.title }}
             </div>
           </li>
@@ -67,7 +68,8 @@ export default {
       this.chapters = this.chapters.reverse();
       this.ascOrder = !this.ascOrder;
     },
-    ch(index){
+    // 阅读
+    goread(index){
        if(this.ascOrder){
         this.chapter=index
       }else{

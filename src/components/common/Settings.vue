@@ -90,23 +90,7 @@ export default {
       this.$createActionSheet({
         title: "可选书源",
         pickerStyle: true,
-        data: [
-          {
-            content: this.soures[0].name
-          },
-          // {
-          //   content: this.soures[1].name
-          // },
-          // {
-          //   content: this.soures[2].name
-          // },
-          // {
-          //   content: this.soures[3].name
-          // },
-          // {
-          //   content: this.soures[4].name
-          // },
-        ],
+        data: [...this.soures.map(i=>({content: i.name}))],
         onSelect: (item, index) => {
           this.$createToast({
             txt: `切换至 ${item.content}`,

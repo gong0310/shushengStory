@@ -5,6 +5,7 @@
       <div class="shelf-main" :style="{ height: scrollHeight }" v-if="hasBook">
       <cube-scroll>
            <cube-swipe>
+             <!-- 书架书籍 -->
             <router-link
               :to="{
                 path: '/read',
@@ -77,16 +78,10 @@ export default {
     }
   },
 methods: {
+  // 获取本地书籍
     getData() {
       if (window.localStorage.getItem("xiaoshuo_shelf")) {
         let _arr = JSON.parse(window.localStorage.getItem("xiaoshuo_shelf"));
-        // for (let i = 0; i < _arr.length; i++) {
-        //   for (let j = 0; j < _arr.length; j++){
-        //     if(_arr[i].id === _arr[j].id){
-        //       _arr.splice(i,1)
-        //     }
-        //   }
-        // }
         let _ids = [];
         _arr.map(item => {
           _ids.push(item.id);
@@ -130,6 +125,7 @@ methods: {
           });
       }
     },
+    // 删除书籍操作
     btnClick(btn, index) {
       if (btn.action === "delete") {
         this.$refs.swipeItem[index].shrink();

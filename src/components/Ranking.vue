@@ -2,6 +2,7 @@
   <div>
     <Header :title="header.title">
       <div slot="label" class="ranking-sex-select">
+        <!-- 男女分类 -->
         <span
           :class="{ 'ranking-sex-selected': item.isSelect }"
           v-for="(item, index) in sex"
@@ -14,6 +15,7 @@
     <loading v-if="isLoaded"/>
     <div class="ranking" v-else>
       <div class="ranking-left" :style="{ height: scrollHeight }">
+        <!-- tab栏排行 -->
         <cube-scroll ref="rankingMenu">
           <div
             class="ranking-left-item"
@@ -25,6 +27,7 @@
           ></div>
         </cube-scroll>
       </div>
+      <!-- 书籍 -->
       <div class="ranking-right" :style="{ height: scrollHeight }">
         <cube-scroll>
           <router-link
@@ -99,6 +102,7 @@ export default {
     }
   },
   methods: {
+    // 获取书籍
     getData() {
       this.$axios.get("api/ranking/gender").then(res => {
         for (let i = 0; i < res.data.male.length; i++) {
@@ -139,6 +143,7 @@ export default {
        this.isLoaded=false
       });
     },
+    // 男女分类
     toSelectSex(index) {
       for (let i in this.sex) {
         this.sex[i].isSelect = false;

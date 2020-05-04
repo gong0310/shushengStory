@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Home from "../components/Home.vue"
 
 Vue.use(VueRouter);
 // 报NavigationDuplicated的可能解决方案
@@ -20,7 +19,7 @@ const routes = [
     name: "home",
     // component: Home
     component: () =>
-    import(/* webpackChunkName: "classify" */ "../components/Home.vue")
+    import(/* webpackChunkName: "Home" */ "../components/Home.vue")
   },
   {
     path: "/classify",
@@ -84,7 +83,7 @@ const routes = [
     path: "/moreview",
     name: "moreview",
     component: () =>
-      import(/* webpackChunkName: "More" */ "../components/common/Moreview.vue")
+      import(/* webpackChunkName: "Moreview" */ "../components/common/Moreview.vue")
   },
 ];
 

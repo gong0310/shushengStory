@@ -55,6 +55,7 @@ export default {
     })
 },
   methods: {
+    // 获取书籍
     getbook() {
       this.$axios.get(`api/book/fuzzy-search?query=${this.$route.query.name}`).then(res => {
         this.bookdata = res.data.books;
@@ -64,6 +65,7 @@ export default {
     goread(id) {
       this.$router.push({ path: "/book", query: { id: id } });
     },
+    // 可换过滤器，效果一样
     formatPeople(nums) {
       if (nums > 9999) {
         return parseFloat((nums / 10000).toFixed(1)) + "万";

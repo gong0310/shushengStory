@@ -126,6 +126,7 @@ export default {
         this.changeHotKeyWord();
       });
     },
+    // 热门推荐
     changeHotKeyWord() {
       let _i = 6;
       let hotKeyWordsByRandom = [];
@@ -162,6 +163,7 @@ export default {
         time: 1000
       }).show();
     },
+    // 自动推荐
     autoCompleteSearch(val) {
       this.$axios.get(`api/book/auto-complete?query=${val}`).then(res => {
         let autoCompleteData = [];
@@ -173,6 +175,7 @@ export default {
         this.autoCompleteData = autoCompleteData;
       });
     },
+    // 去搜索详情页面，并且加入本地历史搜索
     toResult(val) {
       let history = localStorage.getItem("search_history");
       if (history) {

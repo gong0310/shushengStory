@@ -1,5 +1,6 @@
 <template>
   <div class="footer">
+    <!-- 底部tab切换栏 -->
     <cube-tab-bar v-model="selectedLabelSlots" @click="clickHandler">
       <cube-tab
         v-for="(item, index) in tabs"

@@ -2,6 +2,7 @@
   <div>
     <Header :title="header.title" :showBack="header.showBack"></Header>
     <loading v-if="!isLoaded" />
+    <!-- 书籍详情 -->
     <div class="book" v-else :style="{ height: scrollHeight }" ref="book">
       <cube-scroll>
         <div class="book-header">
@@ -25,6 +26,7 @@
             <p class="book-header-main-time" v-text="bookInfo.updatedTime"></p>
           </div>
         </div>
+        <!-- 操作面板 -->
         <div class="book-button">
           <a
             @click="toOperateShelf"
@@ -72,6 +74,7 @@
           <i class="cubeic-arrow" @click="golist"></i>
           <!-- </router-link> -->
         </div>
+        <!-- 评论 -->
         <div class="book-review">
           <div class="book-review-title">
             <p>热门书评</p>
@@ -94,6 +97,7 @@
             </div>
           </div>
         </div>
+        <!-- 推荐书籍 -->
          <div class="book-moreLove">
           <div class="book-moreLove-title">
             <span>你可能感兴趣</span>
@@ -193,6 +197,7 @@ export default {
         this.isLoaded = true;
       });
     },
+    // 书籍热评
     getBookReview() {
       this.$axios
         .get(`/api/post/review/best-by-book?book=${this.bookId}&limit=5`)
@@ -213,9 +218,11 @@ export default {
           this.bookReviewData = _bookReviewData;
         });
     },
+    // 目录
     golist() {
       this.$router.push({ name: "mulu", query: { id: this.bookId } });
     },
+    // 书架操作
     toOperateShelf() {
       if (this.isAddShelf) {
         //remove

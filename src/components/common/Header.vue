@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <div class="header-left">
+      <!-- 返回 -->
       <i class="cubeic-back" v-if="showBack" @click="back"></i>
+      <!-- 标题 -->
       <span class="header-span" v-text="title" v-if="title"></span>
       <i @click="neww" class="iconfont icon-tihuan neew"></i>
     </div>
@@ -33,20 +35,12 @@ export default {
   },
   methods: {
     back() {
-      // this.$router.push(`${this.parh}`);
-      // console.log(this.parh)
       this.$router.go(-1)
     },
     neww() {
       this.$router.go(0);
     }
-  },
-  // beforeRouteEnter(to, from, next) {
-  //   console.log(from)
-  //   next(vm => {
-  //     vm.parh = from.path;
-  //   });
-  // }
+  }
 };
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="app">
+      <!-- 轮播图 -->
       <transition-group tag="ul" name="move" mode="out-in">
         <li v-for="(img,i) in imgs" v-show="i === index" :key="img.id">
           <img :src="img.img"  @click="goread(img.id)" />
@@ -28,10 +29,12 @@ export default {
     }, 3500);
     this.getSwiperData();
   },
+  // 销毁计时器
   beforeDestroy() {
     clearInterval(this.timer);
   },
   methods: {
+    // 获取轮播图图片
     getSwiperData() {
       this.$axios
         .get("api/recommendPage/node/spread/" + this.id, {
@@ -48,6 +51,7 @@ export default {
           }
         });
     },
+    // 轮播图进入书籍
     goread(id){
         console.log(id)
         this.$router.push({path:'book',query:{id:id}})

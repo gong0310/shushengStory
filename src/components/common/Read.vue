@@ -4,9 +4,11 @@
     <loading v-if="isLoaded" />
     <div v-else :style="{ height: scrollHeight }" @click="setting" ref="article">
       <cube-scroll ref="scroll" :data="cpContent">
+        <!-- 标题 -->
         <h1
           :style="{fontSize:fontSize+4+'px', marginBottom: '2vh',fontWeight:400,color:'#333',paddingLeft:'15px',paddingTop:'25px'}"
         >{{cpTitle}}</h1>
+        <!-- 内容 -->
         <p
           :style="{fontSize:fontSize+'px',color:'#5c5d58',margin:'5px',textIndent:'2em',textAlign:'justify',padding:'5px 15px',
           verticalAlign: 'baseline'}"
@@ -92,7 +94,6 @@ export default {
       this.$axios
         .get(`api/chapter/${link}`)
         .then(res => {
-          // console.log(res.data.chapter.isVip);
           if (res.data.chapter.isVip) {
             this.cpTitle = "本章为付费章节，请至正版阅读平台订阅";
             return;
@@ -110,7 +111,6 @@ export default {
     },
     setting() {
       this.onSetting = !this.onSetting;
-      // this.$refs.setting.showOptions();
     },
     chapterChange(to) {
       if (
@@ -128,30 +128,18 @@ export default {
       if (window.localStorage.getItem("xiaoshuo_shelf")) {
         let _arr = JSON.parse(window.localStorage.getItem("xiaoshuo_shelf"));
         for (let i = 0; i < _arr.length; i++) {
-          // for (let j = 0; j < _arr.length; j++){
           if (_arr[i].id === this.bookId) {
             _arr[i].cpIndex = this.cpIndex;
             window.localStorage.setItem("xiaoshuo_shelf", JSON.stringify(_arr));
-            // console.log("id相同")
-            return
-          // } else {
-          //    console.log("id不同")
-          //   _arr.push({
-          //     id: this.bookId,
-          //     name: this.bookTitle,
-          //     img: this.img,
-          //     cpIndex: this.cpIndex
-          //   });
-          //   window.localStorage.setItem("xiaoshuo_shelf", JSON.stringify(_arr));
-          //   return
-          // }
           }
         }
       } 
     },
+    // 回到顶部
     scrollTo() {
       this.$refs.scroll.scrollTo(0, 0, 1);
     },
+    // 字体样式
     colorChange(backgroundColor) {
       this.$refs.article.style.backgroundColor = backgroundColor;
       if (backgroundColor === "#2c2c2c") {

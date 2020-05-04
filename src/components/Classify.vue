@@ -2,6 +2,7 @@
   <div>
     <Header :title="header.title"></Header>
      <Loading v-if="isLoaded"/>
+     <!-- 分类列表 -->
     <div class="classify"  :style="{ height: scrollHeight }" v-else>
       <cube-scroll>
       <div>
@@ -51,6 +52,7 @@ export default {
     };
   },
   methods: {
+    // 获取分类
     getData() {
       this.$axios.get(`/api/cats/lv2/statistics`).then(res => {
         for (let i = 0; i < this.classify.length; i++) {

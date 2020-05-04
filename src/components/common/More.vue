@@ -10,9 +10,11 @@
           :key="item._id"
           @click="goread(item._id)"
         >
+        <!-- 封面图 -->
           <div class="searchResult-item-img">
             <img v-lazy="$store.state.imgHeader + item.cover" :key="item._id" />
           </div>
+          <!-- 主要内容 -->
           <div class="searchResult-item-main">
             <p class="searchResult-item-name" v-text="item.title"></p>
             <p class="searchResult-item-author" v-text="item.author"></p>
@@ -49,12 +51,14 @@ export default {
     Footer,
     Loading
   },
+  // 前置路由守卫,解决不刷新
  beforeRouteEnter(to,from,next){
     next(vm=>{
       vm.getbook()
     })
 },
   methods: {
+    // 获取书籍
     getbook() {
       this.$axios.get(`/api/ranking/${this.$route.query.id}`).then(res => {
            console.log(res)
@@ -65,6 +69,7 @@ export default {
     goread(id) {
       this.$router.push({ path: "/book", query: { id: id } });
     },
+    // 这也可以用过滤器，都行
     formatPeople(nums) {
       if (nums > 9999) {
         return parseFloat((nums / 10000).toFixed(1)) + "万";
@@ -73,6 +78,7 @@ export default {
       }
     }
   },
+  // 获取屏幕高度，以便cube-scroll滑动
   computed: {
     scrollHeight: function() {
       return (

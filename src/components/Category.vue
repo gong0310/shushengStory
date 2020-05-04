@@ -3,12 +3,14 @@
     <Header :title="header.title" :showBack=true></Header>
     <div class="category-filter">
       <div class="category-filter-item">
+        <!-- 分类 -->
         <cube-scroll direction="horizontal">
           <cube-checker v-model="checkerType" :options="checkerTypeOptions" type="radio"/>
         </cube-scroll>
       </div>
     </div>
     <Loading v-if="isLoaded"/>
+    <!-- 书籍 -->
     <div class="category" :style="{ height: scrollHeight }" v-else>
       <cube-scroll  ref="scroll">
         <router-link
@@ -65,6 +67,7 @@ export default {
     };
   },
   methods: {
+    // 按分类获取书籍
     getData() {
        this.$axios.get(`/api/book/by-categories?gender=${this.$route.query.gender}&type=${this.checkerType}&major=${this.$route.query.name}&minor=${this.checkerClassifyChild === "all"? "": this.checkerClassifyChild}&start=0&limit=20`)
         .then(res => {
