@@ -1,4 +1,6 @@
-# shushengStory
+# shushengStory  
+功能展示:  
+- [x] 男女推荐
 
 ## Project setup
 ```
